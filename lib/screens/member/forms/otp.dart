@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:barter/constant/color.dart';
 import 'package:barter/element/otp/appbar.dart';
 import 'package:barter/element/otp/pinput.dart';
@@ -7,6 +8,27 @@ import 'package:get/get.dart';
 class PinputExample extends StatelessWidget {
   final String phoneNumber;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TimerController controller = Get.put(TimerController());
+
+  widgetTimer() {
+    if (controller.countdown.value == 0) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 0),
+        child: TextButton(
+          onPressed: () {
+            controller.countdown.value = 60;
+          },
+          child: const Center(
+            child: Text("ส่งอีกครั้ง",
+                style:
+                    TextStyle(fontFamily: "Prompt", color: Constants.orange)),
+          ),
+        ),
+      );
+    } else {
+      return waitTimer(controller);
+    }
+  }
 
   PinputExample({Key? key, required this.phoneNumber}) : super(key: key);
 
@@ -34,32 +56,10 @@ class PinputExample extends StatelessWidget {
                 ),
               ),
               pinput(), // Make sure pinput is a valid widget and imported correctly
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 22),
-                child: TextButton(
-                  onPressed: () {
-                    formKey.currentState!.validate();
-                    if (formKey.currentState!.validate()) {
-                      print('true');
-                      // Navigate to the next screen or perform other actions
-                    } else {
-                      print('false');
-                    }
-                  },
-                  child: Container(
-                    color: Constants.white,
-                    width: Get.width / 1.15,
-                    height: 40,
-                    child: const Center(
-                      child: Text(
-                        "ถัดไป",
-                        style: TextStyle(
-                            fontFamily: "Prompt", color: Constants.black),
-                      ),
-                    ),
-                  ),
-                ),
+              const SizedBox(
+                height: 40,
               ),
+              Obx(() => widgetTimer()),
               const Spacer()
             ],
           ),
@@ -85,4 +85,46 @@ class PinputExample extends StatelessWidget {
         .substring(index)); // Add the last group without splitting
     return parts.join(' '); // Join parts with space
   }
+}
+
+class TimerController extends GetxController {
+  RxInt countdown = 60.obs;
+  late Timer _timer;
+
+  @override
+  void onInit() {
+    super.onInit();
+    _startTimer();
+  }
+
+  void _startTimer() {
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(oneSec, (timer) {
+      if (countdown.value == 0) {
+        timer.cancel();
+      } else {
+        countdown.value--;
+      }
+    });
+  }
+
+  @override
+  void onClose() {
+    _timer.cancel();
+    super.onClose();
+  }
+}
+
+Widget waitTimer(controller) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      const Text("กรุณารอ "),
+      Obx(() => Text(
+            controller.countdown.value.toString(),
+            style: const TextStyle(color: Constants.orange),
+          )),
+      const Text(" ก่อนส่งอีกครั้ง")
+    ],
+  );
 }

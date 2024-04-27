@@ -2,11 +2,11 @@ import "package:barter/constant/color.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
 
-class AppbarOTP extends StatelessWidget implements PreferredSizeWidget {
+class AppbarForm extends StatelessWidget implements PreferredSizeWidget {
   @override
   // TODO: implement preferredSize
   Size get preferredSize => const Size.fromHeight(100);
-  const AppbarOTP({super.key});
+  const AppbarForm({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class AppbarOTP extends StatelessWidget implements PreferredSizeWidget {
         padding: EdgeInsets.only(top: 10),
         child: Center(
             child: Text(
-          "ใส่รหัสยืนยันตัวตน",
+          "ลงทะเบียน",
           style: TextStyle(fontFamily: "Prompt"),
         )),
       ),

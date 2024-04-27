@@ -18,6 +18,7 @@ dependencies:
   get: ^4.6.6
 
   #Utilities
+  camera: ^0.10.5+9 # https://pub.dev/packages/camera/
   pinput: ^4.0.0 # https://pub.dev/packages/pinput
   flutter_switch: ^0.3.2 # https://pub.dev/packages/flutter_switch
   lottie: ^2.7.0 # https://pub.dev/packages/lottie
@@ -28,6 +29,8 @@ dependencies:
   infinite_scroll_pagination: ^4.0.0 # https://pub.dev/packages/infinite_scroll_pagination/
   intl: ^0.17.0
   google_fonts: ^6.2.1 # https://pub.dev/packages/google_font
+  image_picker: ^1.0.8 # https://pub.dev/packages/image_picker/
+  path_provider: ^2.1.3 # https://pub.dev/packages/path_provider
 
   #Local storage
   shared_preferences: ^2.2.2 # https://pub.dev/packages/shared_preferences

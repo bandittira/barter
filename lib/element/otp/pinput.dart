@@ -1,5 +1,5 @@
 import "package:barter/constant/color.dart";
-import "package:barter/screens/member/forms/citizen.dart";
+import "package:barter/screens/member/forms/form.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
 import "package:google_fonts/google_fonts.dart";
@@ -17,7 +17,7 @@ final defaultPinTheme = PinTheme(
     color: const Color.fromRGBO(70, 69, 66, 1),
   ),
   decoration: BoxDecoration(
-    color: const Color.fromRGBO(232, 235, 241, 0.37),
+    color: const Color.fromARGB(94, 201, 204, 211),
     borderRadius: BorderRadius.circular(24),
   ),
 );
@@ -29,7 +29,7 @@ final cursor = Align(
     height: 1,
     margin: const EdgeInsets.only(bottom: 12),
     decoration: BoxDecoration(
-      color: const Color.fromRGBO(137, 146, 160, 1),
+      color: const Color.fromARGB(255, 107, 113, 124),
       borderRadius: BorderRadius.circular(8),
     ),
   ),
@@ -56,14 +56,20 @@ Widget pinput() {
       defaultPinTheme: defaultPinTheme,
       separatorBuilder: (index) => const SizedBox(width: 8),
       validator: (value) {
-        return value == '222222' ? null : 'รหัสไม่ถูกต้อง';
+        if (value == '222222') {
+          return null;
+        } else if (value == '') {
+          return "โปรดใส่รหัส ที่ได้รับจาก SMS";
+        } else {
+          return "รหัสไม่ถูกต้อง";
+        }
       },
       errorTextStyle: TextStyle(fontSize: 14, color: Colors.grey.shade800),
       hapticFeedbackType: HapticFeedbackType.lightImpact,
       onCompleted: (pin) {
         debugPrint('onCompleted: $pin');
         if (pin == "222222") {
-          Get.to(const Citizen());
+          Get.to(RegisterForm());
         }
       },
       onChanged: (value) {
