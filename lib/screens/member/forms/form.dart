@@ -27,7 +27,7 @@ class RegisterForm extends StatelessWidget {
       if (pickedImage == null) return;
       image.value = File(pickedImage.path);
       // Navigate to the next screen after picking an image
-      Get.to(() => const NextScreen());
+      Get.to(() => NextScreen());
     } catch (e) {
       null;
     }
@@ -61,7 +61,7 @@ class RegisterForm extends StatelessWidget {
                       validator: (value) {
                         if (value == "") {
                           return "กรุณากรอกข้อมูล";
-                        } else if (value!.length <= 6) {
+                        } else if (value!.length < 6) {
                           return "รหัสผ่านต้องมีมากกว่า 6 ตัว";
                         } else {
                           return null;
