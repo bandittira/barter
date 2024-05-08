@@ -129,7 +129,7 @@ class AddressForm extends StatelessWidget {
                       print(controller.selectedProvince.value),
                       filterDistrict(controller.selectedProvince.value)
                     },
-                    selectedItem: "กรุงเทพฯ",
+                    selectedItem: "กรุงเทพมหานคร",
                   )
                 ],
               ),
