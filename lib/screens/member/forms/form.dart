@@ -1,7 +1,8 @@
 import 'dart:io';
 
 import 'package:barter/constant/color.dart';
-import 'package:barter/element/form/appbar/form.dart';
+import 'package:barter/widgets/form/appbar/form.dart';
+import 'package:barter/screens/member/forms/controller/controller.dart';
 import 'package:barter/screens/member/forms/personal_form.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,16 +17,17 @@ class RegisterForm extends StatelessWidget {
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  final MyController _controller = Get.put(MyController());
+
   // Pick image
   final ImagePicker _picker = ImagePicker();
-  final Rx<File?> image = Rx<File?>(null);
 
   Future<void> pickImageAndNavigate() async {
     try {
       final XFile? pickedImage =
           await _picker.pickImage(source: ImageSource.camera);
       if (pickedImage == null) return;
-      image.value = File(pickedImage.path);
+      _controller.image.value = File(pickedImage.path);
       // Navigate to the next screen after picking an image
       Get.to(() => NextScreen());
     } catch (e) {
@@ -58,6 +60,7 @@ class RegisterForm extends StatelessWidget {
                     child: TextFormField(
                       textInputAction: TextInputAction.done,
                       obscureText: !_passwordVisible.value,
+                      controller: _controller.password,
                       validator: (value) {
                         if (value == "") {
                           return "กรุณากรอกข้อมูล";

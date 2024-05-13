@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:barter/constant/color.dart';
-import 'package:barter/element/otp/appbar.dart';
-import 'package:barter/element/otp/pinput.dart';
+import 'package:barter/widgets/otp/appbar.dart';
+import 'package:barter/widgets/otp/pinput.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

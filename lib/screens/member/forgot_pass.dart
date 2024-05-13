@@ -1,5 +1,5 @@
 import 'package:barter/constant/color.dart';
-import 'package:barter/element/member/forgot_password/appbar.dart';
+import 'package:barter/widgets/member/forgot_password/appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

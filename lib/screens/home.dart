@@ -1,9 +1,10 @@
 import 'package:barter/constant/color.dart';
-import 'package:barter/element/home/carousel.dart';
-import 'package:barter/element/home/menu.dart';
-import 'package:barter/element/home/menubar.dart';
-import 'package:barter/element/home/product.dart';
-import 'package:barter/element/home/search_bar.dart';
+import 'package:barter/widgets/home/carousel.dart';
+import 'package:barter/widgets/home/menu.dart';
+import 'package:barter/widgets/home/menubar.dart';
+import 'package:barter/widgets/home/product.dart';
+import 'package:barter/widgets/home/search_bar.dart';
+import 'package:barter/screens/member/forms/controller/province.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -20,6 +21,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    readJson();
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(

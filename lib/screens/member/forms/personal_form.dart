@@ -1,6 +1,9 @@
 import 'package:barter/constant/color.dart';
-import 'package:barter/element/form/appbar/form.dart';
+import 'package:barter/widgets/form/appbar/form.dart';
 import 'package:barter/screens/member/forms/address_form.dart';
+import 'package:barter/screens/member/forms/controller/controller.dart';
+import 'package:barter/screens/member/forms/controller/validator.dart';
+import 'package:barter/widgets/form/appbar/textformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -11,13 +14,7 @@ class NextScreen extends StatelessWidget {
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  String? validateInput(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'โปรดกรอกข้อมูล';
-    }
-    return null; // Return null if validation passes
-  }
-
+  final MyController _controller = Get.put(MyController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,33 +56,13 @@ class NextScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                  child: Stack(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(0),
-                          color: Colors.grey.shade100,
-                        ),
-                      ),
-                      TextFormField(
-                        validator: validateInput,
-                        textInputAction: TextInputAction.next,
-                        decoration: const InputDecoration(
-                            hintText: "ชื่อจริง (ภาษาไทย)",
-                            hintStyle:
-                                TextStyle(fontSize: 14, fontFamily: "Prompt"),
-                            prefixIcon: Icon(
-                              Iconsax.profile_circle,
-                              size: 24,
-                              color: Constants.grey,
-                            ) // Remove bottom border line
-                            ),
-                      ),
-                    ],
-                  ),
+                MyCustomTextField(
+                  hintText: "ชื่อจริง (ภาษาไทย)",
+                  prefixIcon: Iconsax.profile_circle,
+                  horizontal: 30,
+                  vertical: 10,
+                  validator: validateInput,
+                  controller: _controller.fname,
                 ),
                 const Padding(
                   padding: EdgeInsets.only(left: 35, top: 10),
@@ -102,77 +79,13 @@ class NextScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                  child: Stack(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(0),
-                          color: Colors.grey.shade100,
-                        ),
-                      ),
-                      TextFormField(
-                        validator: validateInput,
-                        textInputAction: TextInputAction.next,
-                        decoration: const InputDecoration(
-                            hintText: "นามสกุล (ภาษาไทย)",
-                            hintStyle:
-                                TextStyle(fontSize: 14, fontFamily: "Prompt"),
-                            prefixIcon: Icon(
-                              Iconsax.profile_circle,
-                              size: 24,
-                              color: Constants.grey,
-                            ) // Remove bottom border line
-                            ),
-                      ),
-                    ],
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 35, top: 10),
-                  child: Row(
-                    children: [
-                      Text(
-                        "เบอร์โทรศัพท์",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: "Prompt",
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                  child: Stack(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(0),
-                          color: Colors.grey.shade100,
-                        ),
-                      ),
-                      TextFormField(
-                        validator: validateInput,
-                        keyboardType: TextInputType.phone,
-                        textInputAction: TextInputAction.next,
-                        decoration: const InputDecoration(
-                            hintText: "086-666-6666",
-                            hintStyle:
-                                TextStyle(fontSize: 14, fontFamily: "Prompt"),
-                            prefixIcon: Icon(
-                              Iconsax.call,
-                              size: 24,
-                              color: Constants.grey,
-                            ) // Remove bottom border line
-                            ),
-                      ),
-                    ],
-                  ),
+                MyCustomTextField(
+                  hintText: "นามสกุล (ภาษาไทย)",
+                  prefixIcon: Iconsax.profile_circle,
+                  horizontal: 30,
+                  vertical: 10,
+                  validator: validateInput,
+                  controller: _controller.lname,
                 ),
                 const Padding(
                   padding: EdgeInsets.only(left: 35, top: 10),
@@ -201,6 +114,7 @@ class NextScreen extends StatelessWidget {
                         ),
                       ),
                       TextFormField(
+                        controller: _controller.lineId,
                         scrollPadding: const EdgeInsets.only(bottom: 200),
                         validator: validateInput,
                         textInputAction: TextInputAction.done,

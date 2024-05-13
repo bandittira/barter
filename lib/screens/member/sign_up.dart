@@ -1,24 +1,19 @@
 import 'package:barter/constant/color.dart';
-import 'package:barter/element/member/sign_up/appbar.dart';
+import 'package:barter/widgets/member/sign_up/appbar.dart';
+import 'package:barter/screens/member/forms/controller/controller.dart';
+import 'package:barter/screens/member/forms/controller/validator.dart';
 import 'package:barter/screens/member/forms/otp.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 class SignUp extends StatelessWidget {
   SignUp({super.key});
-  
-  final TextEditingController phoneNumberController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
-  String? validatePhoneNumber(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'โปรดใส่หมายเลขโทรศัพท์';
-    }
-    // You can add more complex validation logic here if needed
-    return null; // Return null if the input is valid
-  }
+  final MyController controller = Get.put(MyController());
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +32,11 @@ class SignUp extends StatelessWidget {
             child: Form(
               key: formKey,
               child: TextFormField(
-                controller: phoneNumberController,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                  // ให้รับเฉพาะตัวเลข 1-10
+                ],
+                controller: controller.phoneNumberController,
                 validator: validatePhoneNumber,
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.phone,
@@ -58,7 +57,7 @@ class SignUp extends StatelessWidget {
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                     Get.to(PinputExample(
-                      phoneNumber: phoneNumberController.text,
+                      phoneNumber: controller.phoneNumberController.text,
                     ));
                   } else {}
                 },
