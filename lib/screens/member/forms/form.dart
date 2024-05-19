@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:barter/constant/color.dart';
 import 'package:barter/widgets/form/appbar/form.dart';
 import 'package:barter/screens/member/forms/controller/controller.dart';
@@ -110,7 +110,17 @@ class RegisterForm extends StatelessWidget {
                 child: TextButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                      pickImageAndNavigate(); // Call pickImageAndNavigate instead of Get.to(pickImage())
+                      AwesomeDialog(
+                        context: context,
+                        dialogType: DialogType.info,
+                        animType: AnimType.bottomSlide,
+                        title: 'Form Valid',
+                        desc: 'Your form is valid. Proceeding...',
+                        btnCancelOnPress: () {},
+                        btnOkOnPress: () {
+                          pickImageAndNavigate();
+                        },
+                      ).show();
                     }
                   },
                   child: Container(

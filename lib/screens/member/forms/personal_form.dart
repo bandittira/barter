@@ -4,6 +4,7 @@ import 'package:barter/screens/member/forms/address_form.dart';
 import 'package:barter/screens/member/forms/controller/controller.dart';
 import 'package:barter/screens/member/forms/controller/validator.dart';
 import 'package:barter/widgets/form/appbar/textformfield.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -57,6 +58,8 @@ class NextScreen extends StatelessWidget {
                   ),
                 ),
                 MyCustomTextField(
+                  keyboardType: TextInputType.text,
+                  bottom: 0,
                   hintText: "ชื่อจริง (ภาษาไทย)",
                   prefixIcon: Iconsax.profile_circle,
                   horizontal: 30,
@@ -80,6 +83,8 @@ class NextScreen extends StatelessWidget {
                   ),
                 ),
                 MyCustomTextField(
+                  keyboardType: TextInputType.text,
+                  bottom: 0,
                   hintText: "นามสกุล (ภาษาไทย)",
                   prefixIcon: Iconsax.profile_circle,
                   horizontal: 30,
@@ -130,6 +135,17 @@ class NextScreen extends StatelessWidget {
                             ),
                       ),
                     ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Container(
+                    padding: const EdgeInsets.only(left: 30, right: 20),
+                    child: const Text(
+                      "โปรดกรอกข้อมูลให้ครบถ้วน เพื่อเพิ่มโอกาสการอนุมัติบัญชีและกรุณากรอกข้อมูลที่มีอยู่จริงเท่านั้น",
+                      style:
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+                    ),
                   ),
                 ),
                 Center(

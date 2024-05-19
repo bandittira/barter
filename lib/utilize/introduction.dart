@@ -37,7 +37,7 @@ class OnBoardingPageState extends State<OnBoardingPage> {
 
   void _onIntroEnd(context) {
     Future.delayed(const Duration(milliseconds: 1000), () {
-      Get.off(const BottomNav());
+      Get.off(const Tabview());
     });
   }
 

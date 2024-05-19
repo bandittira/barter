@@ -1,6 +1,5 @@
 import 'package:barter/utilize/bottom_nav.dart';
 import 'package:barter/utilize/introduction.dart';
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -34,7 +33,7 @@ class MyApp extends StatelessWidget {
           if (snapshot.hasError || snapshot.data == null) {
             return Container(); // Handle error or null response
           }
-          return snapshot.data! ? const OnBoardingPage() : const BottomNav();
+          return snapshot.data! ? const OnBoardingPage() : const Tabview();
         },
       ),
     );

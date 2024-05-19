@@ -71,12 +71,14 @@ class AddressForm extends StatelessWidget {
                 ),
               ),
               MyCustomTextField(
+                keyboardType: TextInputType.text,
                 hintText: "ตัวอย่าง 111/11",
                 prefixIcon: Iconsax.location,
                 horizontal: 30,
                 vertical: 10,
                 validator: validateInput,
                 controller: _controller.address,
+                bottom: 0,
               ),
               const Padding(
                 padding: EdgeInsets.only(left: 35, top: 10),
@@ -106,7 +108,7 @@ class AddressForm extends StatelessWidget {
                     ),
                     DropdownSearch<String>(
                       validator: (String? item) {
-                        if (item == null) {
+                        if (item == "โปรดเลือก") {
                           return "โปรดเลือกจังหวัด";
                         } else {
                           return null;
@@ -160,7 +162,7 @@ class AddressForm extends StatelessWidget {
                     ),
                     Obx(() => DropdownSearch<String>(
                           validator: (String? item) {
-                            if (item == null) {
+                            if (item == "โปรดเลือก") {
                               return "โปรดเลือกจังหวัด";
                             } else {
                               return null;
@@ -216,7 +218,7 @@ class AddressForm extends StatelessWidget {
                     ),
                     Obx(() => DropdownSearch<String>(
                           validator: (String? item) {
-                            if (item == null) {
+                            if (item == "โปรดเลือก") {
                               return "โปรดเลือกจังหวัด";
                             } else {
                               return null;
@@ -302,7 +304,7 @@ class AddressForm extends StatelessWidget {
                   child: TextButton(
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
-                          Get.to(const StoreForm());
+                          Get.to(StoreForm());
                         } else {}
                       },
                       child: Container(
