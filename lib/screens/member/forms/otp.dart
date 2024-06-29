@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:barter/constant/color.dart';
+import 'package:barter/screens/member/forms/controller/controller.dart';
+import 'package:barter/screens/member/forms/data/otp.dart';
 import 'package:barter/widgets/otp/appbar.dart';
 import 'package:barter/widgets/otp/pinput.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +11,7 @@ class PinputExample extends StatelessWidget {
   final String phoneNumber;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TimerController controller = Get.put(TimerController());
+  final MyController _controller = Get.put(MyController());
 
   widgetTimer() {
     if (controller.countdown.value == 0) {
@@ -16,7 +19,8 @@ class PinputExample extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 0),
         child: TextButton(
           onPressed: () {
-            controller.countdown.value = 60;
+            sendOTP(_controller.phoneNumberController.text);
+            controller.restartTimer();
           },
           child: const Center(
             child: Text("ส่งอีกครั้ง",
@@ -108,9 +112,15 @@ class TimerController extends GetxController {
     });
   }
 
+  void restartTimer() {
+    _timer.cancel(); // Cancel the current timer
+    countdown.value = 60; // Reset the countdown value
+    _startTimer(); // Start a new timer
+  }
+
   @override
   void onClose() {
-    _timer.cancel();
+    // _timer.cancel(); // Commented out to keep the timer running
     super.onClose();
   }
 }

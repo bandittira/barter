@@ -17,6 +17,10 @@ dependencies:
   # State management
   get: ^4.6.6
 
+  # Request management
+  dio: ^5.4.3+1
+  http: ^1.2.1
+
   #Utilities
   camera: ^0.10.5+9 # https://pub.dev/packages/camera/
   pinput: ^4.0.0 # https://pub.dev/packages/pinput
@@ -34,7 +38,11 @@ dependencies:
   font_awesome_flutter: ^10.7.0 #https://pub.dev/packages/font_awesome_flutter/
   dropdown_search: ^5.0.6 # https://pub.dev/packages/dropdown_search/
   animations: ^2.0.11 # https://pub.dev/packages/animations
-  awesome_dialog: ^3.2.1 # https://pub.dev/packages/awesome_dialog/
+  badges: ^3.1.2 # https://pub.dev/packages/badges
+  animate_do: ^3.3.4 # https://pub.dev/packages/animate_do/
+  flutter_animate: ^4.5.0 # https://pub.dev/packages/flutter_animate/
+  flutter_line_sdk: ^2.3.7 # https://pub.dev/packages/flutter_line_sdk
+  eva_icons_flutter: ^3.1.0
 
   #Local storage
   shared_preferences: ^2.2.2 # https://pub.dev/packages/shared_preferences

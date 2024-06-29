@@ -11,18 +11,30 @@ List menuText = [
   "ติดต่อบริษัท",
 ];
 
+List<Icon> icons = const [
+  Icon(
+    Icons.shop_outlined,
+    color: Constants.orange,
+  ),
+  Icon(Icons.wallet, color: Constants.orange),
+  Icon(Icons.book, color: Constants.orange),
+  Icon(Icons.list, color: Constants.orange),
+  Icon(Icons.heart_broken, color: Constants.orange),
+  Icon(Icons.message, color: Constants.orange)
+];
+
 Widget menubar() {
   return Container(
     width: Get.width,
-    height: 120,
+    height: 100,
     color: Colors.white,
     child: SingleChildScrollView(
       primary: true,
       scrollDirection: Axis.horizontal,
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         for (int i = 0; i < 6; i++)
           Padding(
-            padding: const EdgeInsets.all(3.0),
+            padding: const EdgeInsets.only(left: 2, right: 2, top: 5),
             child: TextButton(
               onPressed: () {},
               child: Column(
@@ -32,7 +44,8 @@ Widget menubar() {
                     height: 50,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: Constants.grey),
+                        color: Colors.grey.shade100),
+                    child: Center(child: icons[i]),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 5),

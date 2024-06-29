@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_line_sdk/flutter_line_sdk.dart';
 
 Future<void> main() async {
   Get.testMode = true;
@@ -12,8 +13,24 @@ Future<void> main() async {
       .then((value) => runApp(const MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+void lineSDKInit() async {
+  await LineSDK.instance.setup("2005592993").then((_) {
+    print("LineSDK is Prepared");
+  });
+}
+
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  void initState() {
+    lineSDKInit();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +38,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Barter',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
-        useMaterial3: true,
-      ),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+          useMaterial3: true,
+          tooltipTheme: const TooltipThemeData(preferBelow: false)),
       home: FutureBuilder<bool>(
         future: isFirstTimeOpen(),
         builder: (context, snapshot) {

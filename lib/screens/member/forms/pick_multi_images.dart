@@ -1,39 +1,19 @@
-import 'dart:io';
 import 'package:barter/constant/color.dart';
-import 'package:barter/widgets/form/appbar/form.dart';
+import 'package:barter/screens/member/forms/controller/controller.dart';
+import 'package:barter/screens/member/forms/data/register.dart';
+import 'package:barter/screens/member/forms/models/register_model.dart';
+import 'package:barter/screens/member/pending.dart';
+import 'package:barter/widgets/member/appbar/form.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 
-class MultipleImagePicker extends StatefulWidget {
+class MultipleImagePicker extends StatelessWidget {
   const MultipleImagePicker({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _MultipleImagePickerState createState() => _MultipleImagePickerState();
-}
-
-class _MultipleImagePickerState extends State<MultipleImagePicker> {
-  final List<File> _images = [];
-
-  Future<void> _pickImages() async {
-    final pickedImages = await ImagePicker().pickMultiImage();
-    // ignore: unnecessary_null_comparison
-    if (pickedImages != null) {
-      setState(() {
-        _images.addAll(pickedImages.map((e) => File(e.path)));
-      });
-    }
-  }
-
-  void _removeImage(File image) {
-    setState(() {
-      _images.remove(image);
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final MyController controller = Get.put(MyController());
+
     return Scaffold(
       appBar: const AppbarForm(),
       body: SafeArea(
@@ -54,7 +34,7 @@ class _MultipleImagePickerState extends State<MultipleImagePicker> {
               padding: const EdgeInsets.only(top: 30),
               child: Center(
                 child: ElevatedButton(
-                  onPressed: _pickImages,
+                  onPressed: controller.pickImages,
                   child: const Text(
                     'เลือกรูปภาพ',
                     style: TextStyle(fontWeight: FontWeight.w600),
@@ -65,41 +45,43 @@ class _MultipleImagePickerState extends State<MultipleImagePicker> {
             Padding(
               padding: const EdgeInsets.only(top: 15),
               child: Center(
-                child: Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: _images.map((image) {
-                    return Stack(
-                      children: [
-                        Image.file(
-                          image,
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.cover,
-                        ),
-                        Positioned(
-                          right: 0,
-                          top: 0,
-                          child: GestureDetector(
-                            onTap: () => _removeImage(image),
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                color: Colors.red,
-                                shape: BoxShape.circle,
-                              ),
-                              padding: const EdgeInsets.all(4),
-                              child: const Icon(
-                                Icons.close,
-                                color: Colors.white,
-                                size: 16,
+                child: Obx(() {
+                  return Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: images.map((image) {
+                      return Stack(
+                        children: [
+                          Image.file(
+                            image,
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                          Positioned(
+                            right: 0,
+                            top: 0,
+                            child: GestureDetector(
+                              onTap: () => controller.removeImage(image),
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                  color: Colors.red,
+                                  shape: BoxShape.circle,
+                                ),
+                                padding: const EdgeInsets.all(4),
+                                child: const Icon(
+                                  Icons.close,
+                                  color: Colors.white,
+                                  size: 16,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    );
-                  }).toList(),
-                ),
+                        ],
+                      );
+                    }).toList(),
+                  );
+                }),
               ),
             ),
             Padding(
@@ -116,32 +98,43 @@ class _MultipleImagePickerState extends State<MultipleImagePicker> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 50),
                 child: TextButton(
-                    onPressed: () {
-                      if (_images == []) {
-                        Get.snackbar("แจ้งเตือน", "ท่านยังไม่เลือกรูปภาพ");
-                        // Get.to(PinputExample(
-                        //   phoneNumber: phoneNumberController.text,
-                        // ));
-                      } else if (_images.length < 5) {
-                        Get.snackbar(
-                            "แจ้งเตือน", "โปรดเลือกรูปภาพ 5 รูปขึ้นไป");
-                      }
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Constants.orange,
-                      ),
-                      width: Get.width / 1.15,
-                      height: 40,
-                      child: const Center(
-                        child: Text(
-                          "ถัดไป",
-                          style: TextStyle(
-                              fontFamily: "Prompt", color: Colors.white),
+                  onPressed: () {
+                    if (images.isEmpty) {
+                      Get.snackbar("แจ้งเตือน", "ท่านยังไม่เลือกรูปภาพ");
+                    } else if (images.length < 5) {
+                      Get.snackbar("แจ้งเตือน", "โปรดเลือกรูปภาพ 5 รูปขึ้นไป");
+                    } else {
+                      // controller.addUserAddress();
+                      // controller.addStoreValues();
+                      // uploadFormData(RegisterRequest(
+                      //     phonenum: controller.phoneNumberController.text,
+                      //     password: controller.password.text,
+                      //     fname: controller.fname.text,
+                      //     lname: controller.lname.text,
+                      //     lineId: controller.lineId.text,
+                      //     address: userAddressData,
+                      //     store: storeData));
+                      Get.to(PendingPage());
+                    }
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Constants.orange,
+                    ),
+                    width: Get.width / 1.15,
+                    height: 40,
+                    child: const Center(
+                      child: Text(
+                        "ถัดไป",
+                        style: TextStyle(
+                          fontFamily: "Prompt",
+                          color: Colors.white,
                         ),
                       ),
-                    )),
+                    ),
+                  ),
+                ),
               ),
             ),
           ],

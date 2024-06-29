@@ -1,4 +1,5 @@
 import "package:barter/constant/color.dart";
+import "package:barter/screens/member/forms/controller/controller.dart";
 import "package:barter/screens/member/forms/form.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
@@ -56,7 +57,7 @@ Widget pinput() {
       defaultPinTheme: defaultPinTheme,
       separatorBuilder: (index) => const SizedBox(width: 8),
       validator: (value) {
-        if (value == '222222') {
+        if (value == otp.value) {
           return null;
         } else if (value == '') {
           return "โปรดใส่รหัส ที่ได้รับจาก SMS";
@@ -67,9 +68,15 @@ Widget pinput() {
       errorTextStyle: TextStyle(fontSize: 14, color: Colors.grey.shade800),
       hapticFeedbackType: HapticFeedbackType.lightImpact,
       onCompleted: (pin) {
-        debugPrint('onCompleted: $pin');
-        if (pin == "222222") {
-          Get.to(RegisterForm());
+        try {
+          if (pin == otp.value) {
+            Get.to(RegisterForm());
+            otp.value = '';
+            // Navigate to RegisterForm if the pin is "222222"
+            // Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterForm()));
+          }
+        } catch (e) {
+          print('Error occurred: $e');
         }
       },
       onChanged: (value) {

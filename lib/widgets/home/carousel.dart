@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 Widget carousel() {
   return CarouselSlider(
     options: CarouselOptions(
-      height: Get.height / 2.75,
+      height: Get.height / 2.90,
       viewportFraction: 1,
       autoPlay: true,
     ),

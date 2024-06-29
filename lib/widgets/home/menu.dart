@@ -1,4 +1,5 @@
 import "package:barter/constant/color.dart";
+import "package:barter/utilize/bottom_nav.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
@@ -6,7 +7,7 @@ import "package:iconsax/iconsax.dart";
 import 'dart:math' as math;
 
 Widget menu() {
-  return Container(
+  return SizedBox(
     width: Get.width,
     height: Get.height / 3.6,
     child: Row(
@@ -14,13 +15,25 @@ Widget menu() {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            navigateToTabView(1);
+          },
           child: Container(
             padding: const EdgeInsets.all(8),
             width: Get.width / 2.4,
             height: 50,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8), color: Colors.white),
+                borderRadius: BorderRadius.circular(8),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color:
+                        const Color.fromARGB(0, 197, 197, 197).withOpacity(1),
+                    offset: const Offset(0, 4),
+                    blurRadius: 6,
+                    spreadRadius: 2,
+                  )
+                ]),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -31,7 +44,7 @@ Widget menu() {
                 const Column(
                   children: [
                     Text(
-                      "บิ๊กพอยท์",
+                      "กระเป๋าตัง",
                       style: TextStyle(
                           fontSize: 12,
                           fontFamily: "Prompt",
@@ -63,7 +76,17 @@ Widget menu() {
             width: Get.width / 2.4,
             height: 50,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8), color: Colors.white),
+                borderRadius: BorderRadius.circular(8),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color:
+                        const Color.fromARGB(0, 197, 197, 197).withOpacity(1),
+                    offset: const Offset(0, 4),
+                    blurRadius: 6,
+                    spreadRadius: 2,
+                  )
+                ]),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -74,13 +97,13 @@ Widget menu() {
                 const Column(
                   children: [
                     Text(
-                      "กระเป๋าตัง",
+                      "ช็อปปิ้ง",
                       style: TextStyle(
                           fontSize: 12,
                           fontFamily: "Prompt",
                           color: Colors.black),
                     ),
-                    Text("เริ่มใช้งาน",
+                    Text("เริ่มช็อปเลย",
                         style: TextStyle(
                             fontSize: 12,
                             fontFamily: "Prompt",

@@ -25,7 +25,7 @@ class ForgotPass extends StatelessWidget {
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
-                    hintText: "หมายเลขโทรศัพท์ / รหัสผู้ใช้",
+                    hintText: "หมายเลขโทรศัพท์",
                     hintStyle: TextStyle(fontSize: 14, fontFamily: "Prompt"),
                     prefixIcon: Icon(
                       CupertinoIcons.profile_circled,

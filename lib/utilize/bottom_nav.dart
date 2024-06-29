@@ -2,37 +2,56 @@
 import 'package:barter/constant/color.dart';
 import 'package:barter/screens/home.dart';
 import 'package:barter/screens/member/sign_in.dart';
-import 'package:flutter/material.dart';
+import 'package:barter/screens/test.dart';
+import 'package:barter/screens/wallet/wallet.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
 class Tabview extends StatelessWidget {
-  const Tabview({super.key});
+  final int initialIndex;
+
+  const Tabview(
+      {super.key, this.initialIndex = 0}); // Add initialIndex parameter
 
   List<PersistentTabConfig> _tabs() => [
         PersistentTabConfig(
           screen: const HomePage(),
           item: ItemConfig(
-            icon: const Icon(Iconsax.home_hashtag),
+            icon: const Icon(
+              EvaIcons.homeOutline,
+              size: 24,
+            ),
             title: ("หน้าหลัก"),
+            textStyle: const TextStyle(fontSize: 12),
             activeForegroundColor: Constants.orange,
             inactiveForegroundColor: Constants.grey,
           ),
         ),
         PersistentTabConfig(
-          screen: const HomePage(),
+          screen: const WalletPage(),
           item: ItemConfig(
-            icon: const Icon(Iconsax.wallet),
+            icon: const Icon(
+              Iconsax.wallet,
+              size: 24,
+            ),
             title: ("กระเป๋า"),
+            textStyle: const TextStyle(fontSize: 12),
             activeForegroundColor: Constants.orange,
             inactiveForegroundColor: Constants.grey,
           ),
         ),
         PersistentTabConfig(
-          screen: const HomePage(),
+          screen: ProductPage(),
           item: ItemConfig(
-            icon: const Icon(Iconsax.category),
+            icon: const Icon(
+              Iconsax.category,
+              size: 24,
+            ),
             title: ("สินค้า"),
+            textStyle: const TextStyle(fontSize: 12),
             activeForegroundColor: Constants.orange,
             inactiveForegroundColor: Constants.grey,
           ),
@@ -40,8 +59,12 @@ class Tabview extends StatelessWidget {
         PersistentTabConfig(
           screen: const HomePage(),
           item: ItemConfig(
-            icon: const Icon(Iconsax.heart),
+            icon: const Icon(
+              Iconsax.heart,
+              size: 24,
+            ),
             title: ("ลิสของฉัน"),
+            textStyle: const TextStyle(fontSize: 12),
             activeForegroundColor: Constants.orange,
             inactiveForegroundColor: Constants.grey,
           ),
@@ -49,8 +72,12 @@ class Tabview extends StatelessWidget {
         PersistentTabConfig(
           screen: SignIn(),
           item: ItemConfig(
-            icon: const Icon(Iconsax.profile),
+            icon: const Icon(
+              Iconsax.user,
+              size: 24,
+            ),
             title: ("บัญชีของฉัน"),
+            textStyle: const TextStyle(fontSize: 12),
             activeForegroundColor: Constants.orange,
             inactiveForegroundColor: Constants.grey,
           ),
@@ -58,12 +85,22 @@ class Tabview extends StatelessWidget {
       ];
 
   @override
-  Widget build(BuildContext context) => PersistentTabView(
-        tabs: _tabs(),
-        navBarBuilder: (navBarConfig) => Style4BottomNavBar(
-          navBarConfig: navBarConfig,
-        ),
-      );
+  Widget build(BuildContext context) {
+    final PersistentTabController controller =
+        PersistentTabController(initialIndex: initialIndex);
+
+    return PersistentTabView(
+      controller: controller, // Set the controller
+      tabs: _tabs(),
+      navBarBuilder: (navBarConfig) => Style4BottomNavBar(
+        navBarConfig: navBarConfig,
+      ),
+    );
+  }
+}
+
+void navigateToTabView(int index) {
+  Get.offAll(() => Tabview(initialIndex: index));
 }
 
 // class BottomNav extends StatelessWidget {

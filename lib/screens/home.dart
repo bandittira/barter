@@ -40,7 +40,7 @@ class HomePage extends StatelessWidget {
                     ),
                     RawScrollbar(
                         thumbColor: Colors.orange.shade700,
-                        thickness: 4,
+                        thickness: 3,
                         radius: const Radius.circular(15),
                         child: menubar()),
                     const SizedBox(
@@ -52,13 +52,13 @@ class HomePage extends StatelessWidget {
                       height: 40,
                       color: Colors.white,
                       child: const Padding(
-                        padding: EdgeInsets.only(left: 12),
+                        padding: EdgeInsets.only(left: 14),
                         child: Text(
                           "สินค้าใหม่",
                           style: TextStyle(
                               color: Constants.orange,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 18,
                               fontFamily: "Prompt"),
                         ),
                       ),

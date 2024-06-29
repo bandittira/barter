@@ -1,10 +1,9 @@
 import 'package:barter/constant/color.dart';
-import 'package:barter/widgets/form/appbar/form.dart';
+import 'package:barter/widgets/member/appbar/form.dart';
 import 'package:barter/screens/member/forms/address_form.dart';
 import 'package:barter/screens/member/forms/controller/controller.dart';
 import 'package:barter/screens/member/forms/controller/validator.dart';
-import 'package:barter/widgets/form/appbar/textformfield.dart';
-import 'package:camera/camera.dart';
+import 'package:barter/widgets/member/appbar/textformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';

@@ -21,9 +21,9 @@ List<String> price = ["5000", "30", "29900", "50"];
 Widget productCard(
     List<String> images, List<String> productName, List<String> price) {
   return Container(
-    padding: const EdgeInsets.only(bottom: 20, top: 5),
+    padding: const EdgeInsets.only(bottom: 10, top: 5),
+    margin: const EdgeInsets.all(5),
     width: Get.width,
-    color: Constants.white, // Use Colors.white instead of Constants.white
     child: Column(
       children: [
         for (int i = 0;
@@ -62,23 +62,27 @@ Widget _buildProductContainer(
     style: TextButton.styleFrom(padding: EdgeInsets.zero),
     onPressed: () {},
     child: Container(
-      width: Get.width / 2.1,
+      width: Get.width / 2.15,
       height: 220,
-      decoration: const BoxDecoration(
-        color: Colors.white,
-      ),
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(5)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Center the image within the container
-          Center(
-            child: Image.network(
-              imageUrl,
-              fit: BoxFit.contain,
-              height: 150, // Adjust height as needed
+          Padding(
+            padding: const EdgeInsets.only(left: 6, right: 6),
+            child: Center(
+              child: Image.network(
+                imageUrl,
+                fit: BoxFit.contain,
+                height: 150, // Adjust height as needed
+              ),
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(
+            height: 10,
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(
@@ -92,7 +96,7 @@ Widget _buildProductContainer(
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(
-              "P $price",
+              "$price P",
               style: const TextStyle(fontSize: 14, color: Constants.orange),
             ),
           ),

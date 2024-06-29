@@ -1,8 +1,9 @@
 import 'package:barter/constant/color.dart';
+import 'package:barter/screens/member/forms/controller/validator.dart';
+import 'package:barter/screens/member/forms/data/otp.dart';
+import 'package:barter/screens/member/forms/otp.dart';
 import 'package:barter/widgets/member/sign_up/appbar.dart';
 import 'package:barter/screens/member/forms/controller/controller.dart';
-import 'package:barter/screens/member/forms/controller/validator.dart';
-import 'package:barter/screens/member/forms/otp.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,6 +18,32 @@ class SignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void _onLoading(Future<dynamic> Function() anotherFunction) {
+      anotherFunction();
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      );
+      Future.delayed(const Duration(milliseconds: 1000), () {
+        Get.back();
+        if (formKey.currentState!.validate()) {
+          Get.to(
+            PinputExample(
+              phoneNumber: controller.phoneNumberController.text,
+            ),
+          );
+          getOTP(controller.phoneNumberController.text);
+        } else {
+          // Handle validation failure if needed
+        }
+      });
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: const MyAppbarSignUp(),
@@ -52,28 +79,25 @@ class SignUp extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 14),
-            child: TextButton(
-                onPressed: () {
-                  if (formKey.currentState!.validate()) {
-                    Get.to(PinputExample(
-                      phoneNumber: controller.phoneNumberController.text,
-                    ));
-                  } else {}
-                },
-                child: Container(
-                  color: Constants.white,
-                  width: Get.width / 1.15,
-                  height: 40,
-                  child: const Center(
-                    child: Text(
-                      "ถัดไป",
-                      style: TextStyle(
-                          fontFamily: "Prompt", color: Constants.black),
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              child: TextButton(
+                  onPressed: () {
+                    sendOTP(controller.phoneNumberController.text);
+                    _onLoading(
+                        () => duplicate(controller.phoneNumberController.text));
+                  },
+                  child: Container(
+                    color: Constants.white,
+                    width: Get.width / 1.15,
+                    height: 40,
+                    child: const Center(
+                      child: Text(
+                        "ถัดไป",
+                        style: TextStyle(
+                            fontFamily: "Prompt", color: Constants.black),
+                      ),
                     ),
-                  ),
-                )),
-          ),
+                  ))),
           const Padding(
               padding: EdgeInsets.symmetric(vertical: 14),
               child: Row(

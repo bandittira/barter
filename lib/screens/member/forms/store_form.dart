@@ -2,8 +2,8 @@ import 'package:barter/constant/color.dart';
 import 'package:barter/screens/member/forms/controller/controller.dart';
 import 'package:barter/screens/member/forms/controller/validator.dart';
 import 'package:barter/screens/member/forms/pick_multi_images.dart';
-import 'package:barter/widgets/form/appbar/form.dart';
-import 'package:barter/widgets/form/appbar/textformfield.dart';
+import 'package:barter/widgets/member/appbar/form.dart';
+import 'package:barter/widgets/member/appbar/textformfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -91,7 +91,7 @@ class StoreForm extends StatelessWidget {
                   hintText: "ตัวอย่าง 098-888-8888",
                   prefixIcon: CupertinoIcons.phone,
                   keyboardType: TextInputType.phone,
-                  validator: validateInput,
+                  validator: validatePhoneNumberLocal,
                   controller: _controller.storePhone,
                   textInputAction: TextInputAction.next,
                   horizontal: 30,
@@ -139,7 +139,7 @@ class StoreForm extends StatelessWidget {
                   child: TextButton(
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
-                          Get.to(MultipleImagePicker());
+                          Get.to(const MultipleImagePicker());
                         } else {}
                       },
                       child: Container(
